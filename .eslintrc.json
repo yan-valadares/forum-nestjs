@@ -1,7 +1,16 @@
 {
-    "extends": "@rocketseat/eslint-config/node",
+    "extends": [
+      "@rocketseat/eslint-config/node",
+      "prettier"
+    ],
     "rules": {
         "no-useless-constructor": "off",
         "no-new": "off"
-    }
+    },
+    "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+    ]
 }

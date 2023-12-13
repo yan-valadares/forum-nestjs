@@ -1,13 +1,13 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
-import { QuestionsCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
+import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma.service'
 import { PrismaQuestionCommentMapper } from '../mappers/prisma-question-comment-mapper'
 
 @Injectable()
-export class PrismaQuestionsCommentsRepository
-  implements QuestionsCommentsRepository
+export class PrismaQuestionCommentsRepository
+  implements QuestionCommentsRepository
 {
   constructor(private prisma: PrismaService) {}
 
@@ -52,7 +52,7 @@ export class PrismaQuestionsCommentsRepository
   }
 
   async delete(questionComment: QuestionComment): Promise<void> {
-    await this.prisma.question.delete({
+    await this.prisma.comment.delete({
       where: {
       id: questionComment.id.toString()
     }

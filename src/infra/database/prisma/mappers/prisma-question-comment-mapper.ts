@@ -22,9 +22,9 @@ export class PrismaQuestionCommentMapper {
     static toPrisma(questionComment: QuestionComment): Prisma.CommentUncheckedCreateInput {
         return {
             id: questionComment.id.toString(),
-            authorId: questionComment.authorId.toString(),
             questionId: questionComment.questionId.toString(),
             content: questionComment.content,
+            authorId: questionComment.authorId.toString(),
             createdAt: questionComment.createdAt,
             updatedAt: questionComment.updatedAt
         }

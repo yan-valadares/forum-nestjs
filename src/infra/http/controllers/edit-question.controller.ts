@@ -10,9 +10,9 @@ const editQuestionBodySchema = z.object({
   content: z.string(),
 })
 
-type EditQuestionBodySchema = z.infer<typeof editQuestionBodySchema>
-
 const bodyValidationPipe = new ZodValidationPipe(editQuestionBodySchema)
+
+type EditQuestionBodySchema = z.infer<typeof editQuestionBodySchema>
 
 @Controller('/questions/:id')
 export class EditQuestionController {
@@ -28,16 +28,20 @@ export class EditQuestionController {
     const { title, content } = body
     const userId = user.sub
 
-    const result = await this.editQuestion.execute({
-      title,
-      content,
-      authorId: userId,
-      attachmentsIds: [],
-      questionId
-    })
-
-    if(result.isLeft()){
-      throw new BadRequestException()
+    try {
+      const result = await this.editQuestion.execute({
+        title,
+        content,
+        authorId: userId,
+        attachmentsIds: [],
+        questionId
+      })
+  
+      if(result.isLeft()){
+        throw new BadRequestException()
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 }
